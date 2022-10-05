@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth', 'as' => 'dashboard.', 'prefix' => 'dashboa
         Route::get('/{user}/edit', [App\Http\Controllers\Backend\UserController::class, 'edit'])->name('user.edit');
         Route::patch('/{user}', [App\Http\Controllers\Backend\UserController::class, 'update'])->name('user.update');
         Route::delete('/{user}', [App\Http\Controllers\Backend\UserController::class, 'delete'])->name('user.delete');
+        Route::post('/{user}/companies/detach', [App\Http\Controllers\Backend\UserController::class, 'companyDetach'])->name('user.companies.detach');
     });
 
     Route::group(['prefix' => 'companies'], function (){
@@ -40,6 +41,7 @@ Route::group(['middleware' => 'auth', 'as' => 'dashboard.', 'prefix' => 'dashboa
         Route::get('/{company}/edit', [App\Http\Controllers\Backend\CompanyController::class, 'edit'])->name('company.edit');
         Route::patch('/{company}', [App\Http\Controllers\Backend\CompanyController::class, 'update'])->name('company.update');
         Route::delete('/{company}', [App\Http\Controllers\Backend\CompanyController::class, 'delete'])->name('company.delete');
+        Route::post('/{company}/users/detach', [App\Http\Controllers\Backend\CompanyController::class, 'userDetach'])->name('company.users.detach');
     });
 });
 

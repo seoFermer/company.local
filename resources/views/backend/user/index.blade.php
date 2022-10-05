@@ -46,7 +46,7 @@
                                         <td>
                                             <div class="d-flex">
                                                 <a href="{{ route('dashboard.user.edit', $user->id) }}" class="btn btn-outline-primary mr-1"><i class="far fa-edit"></i></a>
-                                                <button class="btn btn-outline-danger remove" data-remove="tr-{{ $user->id }}" data-url="{{ route("dashboard.user.delete", $user->id) }}"><i class="fas fa-trash"></i></button>
+                                                <button class="btn btn-outline-danger btn-remove" data-remove="tr-{{ $user->id }}" data-url="{{ route("dashboard.user.delete", $user->id) }}"><i class="fas fa-trash"></i></button>
                                             </div>
                                         </td>
                                     </tr>

@@ -33,7 +33,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary">{{ trans('translate.Save') }}</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </form>
                         </div>
                     </div>

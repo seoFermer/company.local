@@ -71,21 +71,16 @@
                                 </thead>
                                 <tbody>
                                 @foreach($user->companies AS $company)
-                                    <tr>
+                                    <tr id="tr-{{ $company->id }}">
                                         <td>{{ $company->id }}</td>
                                         <td>
                                             <a href="{{ route('dashboard.company.show', $company->id) }}">{{ $company->name }}</a>
                                         </td>
 
                                         <td>
-{{--                                            <div class="d-flex">--}}
-{{--                                                <a href="{{ route('dashboard.user.edit', $user->id) }}" class="btn btn-outline-primary mr-1"><i class="far fa-edit"></i></a>--}}
-{{--                                                <form action="{{ route('dashboard.user.delete', $user->id) }}" method="POST">--}}
-{{--                                                    @csrf--}}
-{{--                                                    @method('delete')--}}
-{{--                                                    <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>--}}
-{{--                                                </form>--}}
-{{--                                            </div>--}}
+                                            <div class="d-flex">
+                                                <button class="btn btn-outline-danger btn-detach" data-remove="tr-{{ $company->id }}" data-url="{{ route("dashboard.user.companies.detach", $user->id) }}" data-id="{{ $company->id }}"><i class="fas fa-trash"></i></button>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

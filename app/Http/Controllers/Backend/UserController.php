@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\CompanyDetachRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('name')->paginate();
+        $users = User::orderBy('created_at', "DESC")->paginate();
 
         return view('backend.user.index', compact('users'));
     }
@@ -32,7 +34,12 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
-        User::create($data);
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'email_verified_at' => now(),
+        ]);
 
         return redirect()->route('dashboard.user.index');
     }
@@ -56,5 +63,13 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['success' => true, 'message' => 'User deleted successfully'], 200);
+    }
+
+    public function companyDetach(User $user, CompanyDetachRequest $request)
+    {
+        $data = $request->validated(); Log::info($data);
+        $user->companies()->detach($data['id']);
+
+        return response()->json(['success' => true, 'message' => 'Company detach successfully'], 200);
     }
 }

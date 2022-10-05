@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\StoreRequest;
 use App\Http\Requests\Company\UpdateRequest;
+use App\Http\Requests\Company\UserDetachRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
 {
@@ -55,5 +57,13 @@ class CompanyController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Company deleted successfully'], 200);
 
+    }
+
+    public function userDetach(Company $company, UserDetachRequest $request)
+    {
+        $data = $request->validated(); Log::info($data);
+        $company->users()->detach($data['id']);
+
+        return response()->json(['success' => true, 'message' => 'User detach successfully'], 200);
     }
 }
